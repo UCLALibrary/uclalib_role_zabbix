@@ -22,5 +22,3 @@ zabbix_frontend_pkgs:
   - rh-php72
   - rh-php72-php-pgsql
   - rh-php72-php-bcmath
-
-
