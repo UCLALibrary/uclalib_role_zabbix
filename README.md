@@ -53,7 +53,7 @@ Zabbix Server(Optional)
 * `zabbix_script_path_alerts`
 * `zabbix_script_path_external`
 
-Zabbix Agent Log(Optional)
+Zabbix Server Log(Optional)
 #####
 * `zabbix_log_type`
 * `zabbix_log_file`
