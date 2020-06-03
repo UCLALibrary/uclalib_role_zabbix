@@ -1,4 +1,4 @@
-uclalib_role_zabbix
+uclalib_role_zabbix [![Build Status](https://travis-ci.com/UCLALibrary/uclalib_role_zabbix.svg?branch=master)](https://travis-ci.com/UCLALibrary/uclalib_role_elasticsearch)
 =========
 
 This Zabbix role can be utilized to configure an agent AND/OR server setup. The current iteration only supports RHEL/CentOS 7.
@@ -79,5 +79,5 @@ BSD
 Author Information
 ------------------
 
-Anthony Vuong <avuong@library.ucla.edu>
-John Robinson <jhriv@library.ucla.edu>
+- Anthony Vuong <avuong@library.ucla.edu>
+- John Robinson <jhriv@library.ucla.edu>
