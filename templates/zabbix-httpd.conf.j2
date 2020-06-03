@@ -1,0 +1,90 @@
+{% if item.value.use_https is sameas true %}
+<VirtualHost *:{{ item.value.listen_port | default('443') }}>
+  ServerName {{ item.key | default('zabbix.localdomain') }}
+  Alias /zabbix /usr/share/zabbix
+  CustomLog /var/log/httpd/{{ item.value.zabbix_domain_name | default('zabbix.localdomain') }}-{{ item.value.listen_port | default('443') }}-accesslog combined
+  ErrorLog /var/log/httpd/{{ item.value.zabbix_domain_name | default('zabbix.localdomain') }}-{{ item.value.listen_port | default('443') }}-errorlog
+  SSLEngine on
+  SSLCipherSuite HIGH:!aNULL:!MD5
+  SSLProtocol All -SSLv2 -SSLv3
+  SSLHonorCipherOrder On
+  SSLCompression off
+  SSLCertificateFile {{ item.value.ssl_path }}/fullchain.pem
+  SSLCertificateKeyFile {{ item.value.ssl_path }}/privkey.pem
+
+  <Directory "/usr/share/zabbix">
+    Options FollowSymLinks
+    AllowOverride None
+    Require all granted
+
+    <IfModule dir_module>
+        DirectoryIndex index.php
+    </IfModule>
+
+    <FilesMatch \.(php|phar)$>
+        SetHandler "proxy:unix:/var/opt/rh/rh-php72/run/php-fpm/zabbix.sock|fcgi://localhost"
+    </FilesMatch>
+  </Directory>
+
+  <Directory "/usr/share/zabbix/conf">
+    Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/app">
+    Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/include">
+    Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/local">
+    Require all denied
+  </Directory>
+
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName {{ item.key | default('zabbix.localdomain') }}
+  Redirect permanent / https://{{ item.key | default('zabbix.localdomain') }}
+</VirtualHost>
+
+{% else %}
+<VirtualHost *:{{ item.value.listen_port | default('80') }}>
+  ServerName {{ item.key | default('zabbix.localdomain') }}
+  Alias /zabbix /usr/share/zabbix
+  CustomLog /var/log/httpd/{{ item.value.zabbix_domain_name | default('zabbix.localdomain') }}-{{ item.value.listen_port | default('80') }}-accesslog combined
+  ErrorLog /var/log/httpd/{{ item.value.zabbix_domain_name | default('zabbix.localdomain') }}-{{ item.value.listen_port | default('80') }}-errorlog
+
+  <Directory "/usr/share/zabbix">
+    Options FollowSymLinks
+    AllowOverride None
+    Require all granted
+
+    <IfModule dir_module>
+        DirectoryIndex index.php
+    </IfModule>
+
+    <FilesMatch \.(php|phar)$>
+        SetHandler "proxy:unix:/var/opt/rh/rh-php72/run/php-fpm/zabbix.sock|fcgi://localhost"
+    </FilesMatch>
+  </Directory>
+
+  <Directory "/usr/share/zabbix/conf">
+    Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/app">
+    Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/include">
+    Require all denied
+  </Directory>
+
+  <Directory "/usr/share/zabbix/local">
+    Require all denied
+  </Directory>
+
+</VirtualHost>
+{% endif %}

@@ -1,0 +1,24 @@
+### General Zabbix Settings
+ListenPort={{ zabbix_trap_port }}
+PidFile={{ zabbix_pid_file_path }}
+SocketDir={{ zabbix_socket_dir }}
+StatsAllowedIP={{ zabbix_stats_allowed_ip | join(',') }}
+Timeout={{ zabbix_trap_timeout }}
+
+### Logging Settings
+LogType={{ zabbix_log_type }}
+LogFile={{ zabbix_log_file }}
+LogFileSize={{ zabbix_log_file_size }}
+LogSlowQueries={{ zabbix_log_slow_queries_threshold }}
+SNMPTrapperFile={{ zabbix_snmp_trap_log_file }}
+
+### Database Settings
+DBName={{ zabbix_db_name }}
+DBUser={{ zabbix_db_user_name }}
+DBHost={{ zabbix_db_host }}
+DBPassword={{ zabbix_db_user_pw }}
+DBPort={{ zabbix_db_port }}
+
+### Custom Script Settings
+AlertScriptsPath={{ zabbix_script_path_alerts }}
+ExternalScripts={{ zabbix_script_path_external }}

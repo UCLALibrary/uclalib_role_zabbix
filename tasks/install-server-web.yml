@@ -1,0 +1,41 @@
+---
+
+- name: Enable Zabbix Frontend Repo
+  ini_file:
+    dest: /etc/yum.repos.d/zabbix.repo
+    section: zabbix-frontend
+    option: enabled
+    value: "1"
+
+- name: Install Zabbix Frontend packages
+  yum:
+    name: "{{ zabbix_frontend_pkgs }}"
+    state: present
+
+- name: Configure Timezone for Zabbix
+  lineinfile:
+    path: "{{ (ansible_distribution_major_version == '7') | ternary('/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf', '/etc/php/php-fpm.d/zabbix.conf') }}"
+    line: 'php_value[date.timezone] = America/Los_Angeles'
+  notify: Restart PHP FPM
+
+- name: Enable PHP FPM service
+  service:
+    name: "{{ (ansible_distribution_major_version == '7') | ternary('rh-php72-php-fpm', 'php-fpm') }}"
+    enabled: yes
+  notify: Start PHP FPM
+
+- name: Delete sample Zabbix HTTPD conf
+  file:
+    path: /etc/httpd/conf.d/zabbix.conf
+    state: absent
+  notify: Restart HTTPD
+
+- name: Create Zabbix VHost
+  template:
+    src: zabbix-httpd.conf.j2
+    dest: /etc/httpd/vhosts.d/zabbix.conf
+    owner: root
+    group: root
+    mode: 0644
+  with_dict: "{{ zabbix_vhost_config }}"
+  notify: Restart HTTPD
