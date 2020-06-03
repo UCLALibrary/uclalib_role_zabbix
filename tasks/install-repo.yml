@@ -1,0 +1,6 @@
+---
+
+- name: Add Zabbix Repository
+  yum:
+    name: "{{ zabbix_rpm_url }}"
+    state: present

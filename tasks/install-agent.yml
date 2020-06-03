@@ -1,0 +1,24 @@
+---
+
+- name: Install Zabbix Agent packages
+  yum:
+    name: "{{ zabbix_agent_pkgs }}"
+    state: present
+  vars:
+    zabbix_agent_pkgs:
+      - zabbix-agent
+
+- name: Enable Zabbix Agent on boot
+  service:
+    name: zabbix-agent
+    enabled: yes
+  notify: Start Zabbix Agent
+
+- name: Put Zabbix Agent config in place
+  template:
+    src: zabbix-agent.conf.j2
+    dest: /etc/zabbix/zabbix_agentd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Zabbix Agent

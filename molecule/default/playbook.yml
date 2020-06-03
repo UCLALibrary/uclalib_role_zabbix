@@ -1,0 +1,22 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    # Postgres Server setup
+    pgsql_major_version: "12"
+    pgsql_server: true
+    pgsql_superuser_password: "testingpassword"
+    pgsql_host: "instance"
+
+    # Postgres Client setup
+    pgsql_name: "{{ zabbix_db_name }}"
+    pgsql_user: "{{ zabbix_db_user_name }}"
+    pgsql_pass: "{{ zabbix_db_user_pw }}"
+
+  roles:
+    - role: uclalib_role_rhelscl
+    - role: uclalib_role_apache
+    - role: uclalib_role_postgresql
+    - role: uclalib_role_zabbix
+      tags: [server]

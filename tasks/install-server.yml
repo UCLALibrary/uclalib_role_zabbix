@@ -1,0 +1,25 @@
+---
+
+- name: Install Zabbix Server packages
+  yum:
+    name: "{{ zabbix_server_pkgs }}"
+    state: present
+  vars:
+    zabbix_server_pkgs:
+      - "{{ (zabbix_use_mysql) | ternary('zabbix-server-mysql', 'zabbix-server-pgsql') }}"
+
+### Configure zabbix-server file
+- name: Upload Zabbix Server Configuration
+  template:
+    src: zabbix-server.conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: root
+    group: zabbix
+    mode: 0640
+  notify: Restart Zabbix Server
+
+- name: Enable Zabbix Server on boot
+  service:
+    name: zabbix-server
+    enabled: yes
+  notify: Start Zabbix Server

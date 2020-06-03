@@ -1,62 +1,19 @@
 ---
 
-- name: Add Zabbix RPM GPG Key
-  rpm_key:
-    key: https://repo.zabbix.com/{{ item }}
-    state: present
-  become: true
-  loop:
-    - RPM-GPG-KEY-ZABBIX-79EA5ED4
-    - RPM-GPG-KEY-ZABBIX-A14FE591
+- include_tasks: setup-vars.yml
+  tags: [ agent, server ]
 
-- name: Add Zabbix Repository
-  yum_repository:
-    name: '{{ item.name }}'
-    baseurl: '{{ item.url }}'
-    description: '{{ item.description }}'
-    enabled: true
-    gpgcheck: true
-    state: present
-  become: true
-  loop:
-    - {
-        name: 'zabbix',
-        description: 'Zabbix Official Repository - $basearch',
-        url: 'http://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/$basearch/'
-      }
-    - {
-        name: 'zabbix-non-supported',
-        description: 'Zabbix Official Repository non-supported - $basearch',
-        url: 'http://repo.zabbix.com/non-supported/rhel/{{ ansible_distribution_major_version }}/$basearch/'
-      }
+- include_tasks: install-repo.yml
+  tags: [ agent, server ]
 
-- name: Install Zabbix Agent
-  package:
-    name: [ 'zabbix-agent' ]
-    state: present
-  become: true
+- include_tasks: install-agent.yml
+  tags: [ agent, server ]
 
-# If we need to run the agent as root:
-# /etc/systemd/system/zabbix-agent.service.d/override.conf
-# [Service]
-# User=root
-# Group=root
+- include_tasks: install-server.yml
+  tags: [ server ]
 
-- name: Configure Agent
-  lineinfile:
-    path: /etc/zabbix/zabbix_agentd.conf
-    line: '{{ item.key }}={{ item.value }}'
-    regexp: '{{ item.key }}='
-    state: present
-  become: true
-  loop:
-    - { key: 'Server', value: '{{ zabbix_server }}' }
-    - { key: 'ServerActive', value: '{{ zabbix_server }}' }
-    - { key: 'Hostname', value: '{{ zabbix_client_name | default ( inventory_hostname) }}' }
+- include_tasks: install-server-web.yml
+  tags: [ server ]
 
-- name: Enable Agent
-  service:
-    name: zabbix-agent
-    state: started
-    enabled: true
-  become: true
+- include_tasks: init-db.yml
+  tags: [ server ]

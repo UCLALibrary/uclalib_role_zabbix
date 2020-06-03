@@ -1,0 +1,14 @@
+### General Zabbix Agent Settings
+PidFile={{ zabbix_agent_pid_file_path }}
+DenyKey={{ zabbix_agent_deny_key }}
+Server={{ zabbix_agent_server }}
+ListenPort={{ zabbix_agent_listen_port }}
+Hostname={{ zabbix_agent_hostname }}
+ServerActive={{ zabbix_agent_server_active | join(',') }}
+
+
+### Logging Settings
+LogRemoteCommands={{ zabbix_agent_log_remote_commands }}
+LogType={{ zabbix_agent_log_type }}
+LogFile={{ zabbix_agent_log_file }}
+LogFileSize={{ zabbix_agent_log_file_size }}

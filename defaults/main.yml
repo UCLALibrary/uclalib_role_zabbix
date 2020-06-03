@@ -1,4 +1,49 @@
 ---
+zabbix_version: 5.0-1
 
-# LTS Version
-zabbix_version: 5.0
+zabbix_use_mysql: false
+
+zabbix_frontend_pkgs:
+  - zabbix-web-mysql
+  - zabbix-apache-conf
+
+zabbix_db_user_name: zabbix
+zabbix_db_user_pw: zabbix
+zabbix_db_name: zabbixdb
+zabbix_db_host: localhost
+zabbix_db_port: 5432
+
+### Zabbix Server Configuration Parameters
+zabbix_trap_port: 10051
+zabbix_trap_timeout: 4
+zabbix_pid_file_path: /var/run/zabbix/zabbix_server.pid
+zabbix_socket_dir: /var/run/zabbix
+zabbix_log_type: file
+zabbix_log_file: /var/log/zabbix/zabbix_server.log
+zabbix_log_file_size: 0
+zabbix_log_slow_queries_threshold: 3000
+zabbix_snmp_trap_log_file: /var/log/snmptrap/snmptrap.log
+zabbix_stats_allowed_ip:
+  - 127.0.0.1
+zabbix_script_path_alerts: /usr/lib/zabbix/alertscripts
+zabbix_script_path_external: /usr/lib/zabbix/externalscripts
+
+### Frontend VHost Configuration
+zabbix_vhost_config:
+  zabbix.dev:
+    use_https: false
+    ssl_path: /etc/letsencrypt/live/{{ inventory_hostname }}
+
+### Zabbix Agent Configuration Parameters
+zabbix_agent_pid_file_path: /var/run/zabbix/zabbix_agentd.pid
+zabbix_agent_deny_key: "system.run[*]"
+zabbix_agent_server: 127.0.0.1
+zabbix_agent_server_active:
+  - 127.0.0.1
+zabbix_agent_listen_port: 10050
+zabbix_agent_hostname: "{{ inventory_hostname }}"
+
+zabbix_agent_log_type: file
+zabbix_agent_log_file: /var/log/zabbix/zabbix_agentd.log
+zabbix_agent_log_file_size: 0
+zabbix_agent_log_remote_commands: 0
