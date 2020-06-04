@@ -19,4 +19,3 @@
     - role: uclalib_role_apache
     - role: uclalib_role_postgresql
     - role: uclalib_role_zabbix
-      tags: [server]

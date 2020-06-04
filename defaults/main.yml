@@ -32,7 +32,8 @@ zabbix_script_path_external: /usr/lib/zabbix/externalscripts
 zabbix_vhost_config:
   zabbix.dev:
     use_https: false
-    ssl_path: /etc/letsencrypt/live/{{ inventory_hostname }}
+    use_acme: true
+    ssl_path: /etc/letsencrypt/live/{{ ansible_hostname }}
 
 ### Zabbix Agent Configuration Parameters
 zabbix_agent_pid_file_path: /var/run/zabbix/zabbix_agentd.pid
@@ -41,7 +42,7 @@ zabbix_agent_server: 127.0.0.1
 zabbix_agent_server_active:
   - 127.0.0.1
 zabbix_agent_listen_port: 10050
-zabbix_agent_hostname: "{{ inventory_hostname }}"
+zabbix_agent_hostname: "{{ ansible_hostname }}"
 
 zabbix_agent_log_type: file
 zabbix_agent_log_file: /var/log/zabbix/zabbix_agentd.log

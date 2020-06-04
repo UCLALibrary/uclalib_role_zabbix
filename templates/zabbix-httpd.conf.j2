@@ -9,8 +9,9 @@
   SSLProtocol All -SSLv2 -SSLv3
   SSLHonorCipherOrder On
   SSLCompression off
-  SSLCertificateFile {{ item.value.ssl_path }}/fullchain.pem
+  SSLCertificateFile {{ item.value.ssl_path }}/cert.pem
   SSLCertificateKeyFile {{ item.value.ssl_path }}/privkey.pem
+  SSLCertificateChainFile {{ item.value.ssl_path }}/chain.pem
 
   <Directory "/usr/share/zabbix">
     Options FollowSymLinks
