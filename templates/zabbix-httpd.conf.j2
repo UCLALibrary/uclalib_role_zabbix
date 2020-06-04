@@ -47,7 +47,7 @@
 
 <VirtualHost *:80>
   ServerName {{ item.key | default('zabbix.localdomain') }}
-  Redirect permanent / https://{{ item.key | default('zabbix.localdomain') }}
+  Redirect permanent / https://{{ item.key | default('zabbix.localdomain') }}/
 </VirtualHost>
 
 {% else %}
