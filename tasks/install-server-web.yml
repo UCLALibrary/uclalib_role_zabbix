@@ -91,3 +91,12 @@
     mode: 0644
   with_dict: "{{ zabbix_vhost_config }}"
   notify: Restart HTTPD
+
+- name: Create Frontend Config for Zabbix
+  template:
+    src: zabbix.conf.php.j2
+    dest: /etc/zabbix/web/zabbix.conf.php
+    owner: apache
+    group: apache
+    mode: 0640
+  notify: Restart HTTPD
