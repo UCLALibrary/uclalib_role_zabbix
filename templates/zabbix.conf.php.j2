@@ -1,0 +1,19 @@
+<?php 
+$DB['TYPE']           = '{{ 'MYSQL' if zabbix_use_mysql else 'POSTGRESQL' }}';                                                                                                                                                                                                  
+$DB['SERVER']         = '{{ zabbix_db_host }}';
+$DB['PORT']           = '{{ zabbix_db_port }}';
+$DB['DATABASE']       = '{{ zabbix_db_name }}';
+$DB['USER']           = '{{ zabbix_db_user_name }}';
+$DB['PASSWORD']       = '{{ zabbix_db_user_pw }}';
+$DB['SCHEMA']         = '';
+$DB['ENCRYPTION']     = false;
+$DB['KEY_FILE']       = '';
+$DB['CERT_FILE']      = '';
+$DB['CA_FILE']        = '';
+$DB['VERIFY_HOST']    = false;
+$DB['CIPHER_LIST']    = '';
+$DB['DOUBLE_IEEE754'] = true;
+$ZBX_SERVER           = 'localhost';
+$ZBX_SERVER_PORT      = '{{ zabbix_trap_port }}';
+$ZBX_SERVER_NAME      = 'Zabbix Server';
+$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
