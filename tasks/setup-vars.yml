@@ -1,9 +1,5 @@
 ---
 
-- name: Include RedHat variables
-  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when: ansible_os_family == "RedHat"
-
-- name: Include CentOS variables
-  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when: ansible_os_family == "CentOS"
+- name: Include Specific variables
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_os_family == "RedHat" or ansible_os_family == "CentOS"

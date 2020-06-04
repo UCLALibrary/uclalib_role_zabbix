@@ -30,6 +30,58 @@
     state: absent
   notify: Restart HTTPD
 
+- name: Ensure SSL path created
+  file:
+    path: "{{ item.value.ssl_path }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  when: >-
+    zabbix_vhost_config is defined and
+    item.value.use_https and
+    not item.value.use_acme
+  with_dict: "{{ zabbix_vhost_config }}"
+
+- name: Upload SSL certificate
+  copy:
+    src: "{{ item.value.ssl_src_path }}/cert.pem"
+    dest: "{{ item.value.ssl_path }}/cert.pem"
+    owner: root
+    group: root
+    mode: 0644
+  when: >-
+    zabbix_vhost_config is defined and
+    item.value.use_https and
+    not item.value.use_acme
+  with_dict: "{{ zabbix_vhost_config }}"
+
+- name: Upload SSL chain
+  copy:
+    src: "{{ item.value.ssl_src_path }}/chain.pem"
+    dest: "{{ item.value.ssl_path }}/chain.pem"
+    owner: root
+    group: root
+    mode: 0644
+  when: >-
+    zabbix_vhost_config is defined and
+    item.value.use_https and
+    not item.value.use_acme
+  with_dict: "{{ zabbix_vhost_config }}"
+
+- name: Upload SSL key
+  copy:
+    src: "{{ item.value.ssl_src_path }}/privkey.pem"
+    dest: "{{ item.value.ssl_path }}/privkey.pem"
+    owner: root
+    group: root
+    mode: 0600
+  when: >-
+    zabbix_vhost_config is defined and
+    item.value.use_https and
+    not item.value.use_acme
+  with_dict: "{{ zabbix_vhost_config }}"
+
 - name: Create Zabbix VHost
   template:
     src: zabbix-httpd.conf.j2
