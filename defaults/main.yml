@@ -3,6 +3,8 @@ zabbix_version: 5.0-1
 
 zabbix_use_mysql: false
 
+zabbix_install_server: false
+
 zabbix_frontend_pkgs:
   - zabbix-web-mysql
   - zabbix-apache-conf
