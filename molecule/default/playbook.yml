@@ -14,6 +14,9 @@
     pgsql_user: "{{ zabbix_db_user_name }}"
     pgsql_pass: "{{ zabbix_db_user_pw }}"
 
+    # Zabbix setup
+    zabbix_install_server: true
+
   roles:
     - role: uclalib_role_rhelscl
     - role: uclalib_role_apache
