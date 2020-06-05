@@ -7,8 +7,8 @@
   vars:
     zabbix_server_pkgs:
       - "{{ (zabbix_use_mysql) | ternary('zabbix-server-mysql', 'zabbix-server-pgsql') }}"
+      - nmap
 
-### Configure zabbix-server file
 - name: Upload Zabbix Server Configuration
   template:
     src: zabbix-server.conf.j2
@@ -23,3 +23,10 @@
     name: zabbix-server
     enabled: yes
   notify: Start Zabbix Server
+
+- name: Configure Zabbix user to run nmap in privileged mode
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: "zabbix ALL=(ALL) NOPASSWD: /usr/bin/nmap"
+    validate: "/usr/sbin/visudo -cf %s"
