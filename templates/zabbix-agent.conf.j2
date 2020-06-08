@@ -5,8 +5,18 @@ Server={{ zabbix_agent_server }}
 ListenPort={{ zabbix_agent_listen_port }}
 Hostname={{ zabbix_agent_hostname }}
 ServerActive={{ zabbix_agent_server_active | join(',') }}
-HostMetadata={{ zabbix_agent_host_metadata }}
+HostMetadata={{ zabbix_agent_host_metadata | join(' ') }}
 HostMetadataItem=system.uname
+
+### Agent Encryption settings
+{% if zabbix_agent_encrypt is sameas true %}
+TLSConnect={{ zabbix_agent_tls_type }}
+TLSAccept={{ zabbix_agent_tls_type }}
+{% if zabbix_agent_tls_type == 'psk' %}
+TLSPSKFile={{ zabbix_agent_tls_psk_directory }}/zabbix-agent-tls-psk
+TLSPSKIdentity={{ zabbix_agent_tls_psk_identity }}
+{% endif %}
+{% endif %}
 
 ### Logging Settings
 LogRemoteCommands={{ zabbix_agent_log_remote_commands }}
