@@ -8,6 +8,24 @@
     zabbix_agent_pkgs:
       - zabbix-agent
 
+- name: Create TLS directory if setting up agent encryption
+  file:
+    path: "{{ zabbix_agent_tls_psk_directory }}"
+    owner: zabbix
+    group: root
+    mode: 0750
+    state: directory
+  when: zabbix_agent_encrypt
+
+- name: Upload PSK file if PSK encryption is flagged
+  copy:
+    content: "{{ zabbix_agent_tls_psk }}"
+    dest: "{{ zabbix_agent_tls_psk_directory }}//zabbix-agent-tls-psk"
+    owner: zabbix
+    group: root
+    mode: 0640
+  when: zabbix_agent_encrypt and zabbix_agent_tls_type == "psk"
+
 - name: Enable Zabbix Agent on boot
   service:
     name: zabbix-agent
