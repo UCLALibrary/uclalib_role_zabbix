@@ -54,7 +54,7 @@ zabbix_agent_log_file_size: 0
 zabbix_agent_log_remote_commands: 0
 
 ### Zabbix Agent TLS settings
-zabbix_agent_encrypt: true
+zabbix_agent_encrypt: false
 zabbix_agent_tls_type: psk
 zabbix_agent_tls_psk_directory: /etc/zabbix/tls
 zabbix_agent_tls_psk_identity: nonsensitivename
