@@ -1,9 +1,20 @@
+# Parameters can be found here: https://www.zabbix.com/documentation/current/manual/appendix/config/zabbix_server
+
 ### General Zabbix Settings
 ListenPort={{ zabbix_trap_port }}
 PidFile={{ zabbix_pid_file_path }}
 SocketDir={{ zabbix_socket_dir }}
 StatsAllowedIP={{ zabbix_stats_allowed_ip | join(',') }}
 Timeout={{ zabbix_trap_timeout }}
+
+### Cache Sizes
+CacheSize={{ zabbix_cache_size }}
+HistoryCacheSize={{ zabbix_history_cache_size }}
+HistoryIndexCacheSize={{ zabbix_history_index_cache_size }}
+
+### Pollers and forks
+StartPingers={{ zabbix_start_pingers_value }}
+StartPollers={{ zabbix_start_pollers_value }}
 
 ### Logging Settings
 LogType={{ zabbix_log_type }}

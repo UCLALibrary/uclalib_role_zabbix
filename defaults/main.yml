@@ -30,6 +30,15 @@ zabbix_stats_allowed_ip:
 zabbix_script_path_alerts: /usr/lib/zabbix/alertscripts
 zabbix_script_path_external: /usr/lib/zabbix/externalscripts
 
+### Zabbix Server Poll Settings
+zabbix_start_pingers_value: 5
+zabbix_start_pollers_value: 5
+
+### Zabbix Server Cache Settings
+zabbix_cache_size: 64M
+zabbix_history_cache_size: 64M
+zabbix_history_index_cache_size: 16M
+
 ### Frontend VHost Configuration
 zabbix_vhost_config:
   zabbix.dev:
