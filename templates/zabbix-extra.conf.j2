@@ -1,0 +1,5 @@
+# Ansible Managed File - Do Not Edit
+
+{% for param in zabbix_agent_extra_config %}
+{{ param.parameter }}={{ param.value }}
+{% endfor %}

@@ -27,6 +27,7 @@ Zabbix Agent(Optional)
 #####
 * `zabbix_agent_listen_port`
 * `zabbix_agent_hostname`
+* `zabbix_agent_extra_config`
 
 Zabbix Agent Log(Optional)
 #####
