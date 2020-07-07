@@ -35,8 +35,8 @@
 - name: Create Zabbix Agent extra config directory
   file:
     path: "{{ zabbix_agent_extra_config_path }}"
-    owner: root
-    group: root
+    owner: zabbix
+    group: zabbix
     mode: 0750
     state: directory
 
@@ -55,8 +55,8 @@
   template:
     src: "zabbix-extra.conf.j2"
     dest: "{{ zabbix_agent_extra_config_path }}/extra-params.conf"
-    owner: root
-    group: root
+    owner: zabbix
+    group: zabbix
     mode: 0640
   when: zabbix_agent_extra_config | length > 0
   notify: Restart Zabbix Agent
