@@ -34,7 +34,7 @@
 
 - name: Create Zabbix Agent extra config directory
   file:
-    path: "/etc/zabbix/zabbix_agentd.d"
+    path: "{{ zabbix_agent_extra_config_path }}"
     owner: root
     group: root
     mode: 0750
@@ -54,7 +54,7 @@
 - name: Put in place Zabbix Agent extra config file
   template:
     src: "zabbix-extra.conf.j2"
-    dest: "/etc/zabbix/zabbix_agentd.d/extra-params.conf"
+    dest: "{{ zabbix_agent_extra_config_path }}/extra-params.conf"
     owner: root
     group: root
     mode: 0640
