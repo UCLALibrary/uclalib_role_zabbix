@@ -6,7 +6,7 @@ ListenPort={{ zabbix_agent_listen_port }}
 Hostname={{ zabbix_agent_hostname }}
 ServerActive={{ zabbix_agent_server_active | join(',') }}
 HostMetadata={{ zabbix_agent_host_metadata | join(' ') }}
-HostMetadataItem=system.uname
+Include=/etc/zabbix/zabbix_agentd.d/*.conf
 
 ### Agent Encryption settings
 {% if zabbix_agent_encrypt is sameas true %}
