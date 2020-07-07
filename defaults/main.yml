@@ -56,6 +56,7 @@ zabbix_agent_listen_port: 10050
 zabbix_agent_hostname: "{{ ansible_hostname }}"
 zabbix_agent_host_metadata:
   - "Linux"
+zabbix_agent_host_metadata_addtl: []
 zabbix_agent_extra_config_path: /etc/zabbix/zabbix_agentd.d
 zabbix_agent_extra_config: []
   # - parameter: ""
