@@ -40,3 +40,5 @@
     group: root
     mode: 0644
   notify: Restart Zabbix Agent
+  tags:
+    - agent-config-file
