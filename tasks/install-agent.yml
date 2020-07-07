@@ -32,6 +32,14 @@
     enabled: yes
   notify: Start Zabbix Agent
 
+- name: Create Zabbix Agent extra config directory
+  file:
+    path: "{{ zabbix_agent_extra_config_path }}"
+    owner: zabbix
+    group: zabbix
+    mode: 0750
+    state: directory
+
 - name: Put Zabbix Agent config in place
   template:
     src: zabbix-agent.conf.j2
@@ -42,3 +50,15 @@
   notify: Restart Zabbix Agent
   tags:
     - agent-config-file
+
+- name: Put in place Zabbix Agent extra config file
+  template:
+    src: "zabbix-extra.conf.j2"
+    dest: "{{ zabbix_agent_extra_config_path }}/extra-params.conf"
+    owner: zabbix
+    group: zabbix
+    mode: 0640
+  when: zabbix_agent_extra_config | length > 0
+  notify: Restart Zabbix Agent
+  tags:
+    - agent-extra-configs
