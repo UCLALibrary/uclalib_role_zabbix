@@ -1,16 +1,16 @@
 ---
 
-- include_tasks: setup-vars.yml
+- import_tasks: setup-vars.yml
 
-- include_tasks: install-repo.yml
+- import_tasks: install-repo.yml
 
-- include_tasks: install-agent.yml
+- import_tasks: install-agent.yml
 
-- include_tasks: install-server.yml
+- import_tasks: install-server.yml
   when: zabbix_install_server
 
-- include_tasks: install-server-web.yml
+- import_tasks: install-server-web.yml
   when: zabbix_install_server
 
-- include_tasks: init-db.yml
+- import_tasks: init-db.yml
   when: zabbix_install_server
