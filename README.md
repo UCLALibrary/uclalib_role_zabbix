@@ -28,6 +28,8 @@ Zabbix Agent(Optional)
 * `zabbix_agent_listen_port`
 * `zabbix_agent_hostname`
 * `zabbix_agent_extra_config`
+* `zabbix_agent_host_metadata_addtl` - list of additional host metadata parameters that used within host auto-registration to automatically assign a host to sets of check templates.
+* `zabbix_agent_extra_config` - list of extra agent configuration parameters (e.g. UserParameter key/value pairs).
 
 Zabbix Agent Log(Optional)
 #####
