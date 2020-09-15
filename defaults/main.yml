@@ -48,7 +48,7 @@ zabbix_vhost_config:
 
 ### Zabbix Agent Configuration Parameters
 zabbix_agent_pid_file_path: /var/run/zabbix/zabbix_agentd.pid
-zabbix_agent_deny_key: "system.run[*]"
+zabbix_agent_allow_key: "system.run[*]"
 zabbix_agent_server: 127.0.0.1
 zabbix_agent_server_active:
   - 127.0.0.1
