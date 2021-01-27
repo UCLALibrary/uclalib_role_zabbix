@@ -51,6 +51,18 @@
   tags:
     - agent-config-file
 
+- name: Put in place Zabbix Agent Helper Scripts
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - check_network_shares
+  tags:
+    - agent-helper-scripts
+
 - name: Put in place Zabbix Agent extra config file
   template:
     src: "zabbix-extra.conf.j2"
