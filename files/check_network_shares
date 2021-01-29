@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+cd / || exit 1
+
+fail() {
+  printf "1"
+}
+
+# remove comments; remove blank lines; normalize spacing to a single space
+# select mount point and filesystem
+# ensure expected filesystem matches actual filesystem for network filesystems
+# timeout prevents a stale NFS share from freezing the check
+
+# Skips "noauto" filesystems, but will also skip "noauto_da_alloc". As
+# "noauto_da_alloc" applies only to ext4, this won't be a problem in practice.
+
+# Due to the use of pipes, the while opperates in a subshell, so there
+# is no communication to outside the loop. Each failed share will prepend
+# a "1" to the 0, still providing a value greater than 0 and can allow
+# something more sophisticated to count the number of failed shares.
+
+sed -re 's/#.*//; /^$/d; s/\s+/ /g' /etc/fstab \
+  | cut -f2-4 '-d ' \
+  | while read -r fs type options; do
+      if [ "$type" != "nfs" ] && [ "$type" != "cifs" ]; then continue; fi
+      case $options in *noauto*) continue ;; esac
+
+      state="$(timeout -s 9 10 stat -f -c '%T' "$fs")"
+      if [ "$type" != "$state" ]; then fail; fi
+done
+
+echo 0
