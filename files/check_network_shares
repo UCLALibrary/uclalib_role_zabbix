@@ -27,7 +27,14 @@ sed -re 's/#.*//; /^$/d; s/\s+/ /g' /etc/fstab \
       case $options in *noauto*) continue ;; esac
 
       state="$(timeout -s 9 10 stat -f -c '%T' "$fs")"
-      if [ "$type" != "$state" ]; then fail; fi
+      case "$type" in
+         # sometimes cifs mounts appear as smb2
+         cifs) case "$state" in
+                 cifs|smb2) ;;
+                 *) fail ;;
+               esac ;;
+         *) if [ "$type" != "$state" ]; then fail; fi ;;
+      esac
 done
 
 echo 0
