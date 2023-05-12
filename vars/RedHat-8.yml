@@ -1,0 +1,24 @@
+---
+
+zabbix_rpm_url: "https://repo.zabbix.com/zabbix/{{ zabbix_version.split('-')[0].split('.')[0] }}.{{ zabbix_version.split('-')[0].split('.')[1] }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-release-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.noarch.rpm"
+
+zabbix_frontend_pkgs:
+  - "{{ (zabbix_use_mysql) | ternary('zabbix-web-mysql-scl', 'zabbix-web-pgsql-scl') }}"
+  - zabbix-apache-conf-scl
+  - httpd
+  - rh-php72-php-gd
+  - rh-php72-runtime
+  - rh-php72-php-zip
+  - rh-php72-php-xml
+  - rh-php72-php-fpm
+  - rh-php72-php-pear
+  - rh-php72-php-pdo
+  - rh-php72-php-ldap
+  - rh-php72-php-mbstring
+  - rh-php72-php-json
+  - rh-php72-php-common
+  - rh-php72-php-cli
+  - rh-php72-php-process
+  - rh-php72
+  - rh-php72-php-pgsql
+  - rh-php72-php-bcmath
