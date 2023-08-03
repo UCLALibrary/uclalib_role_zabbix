@@ -13,7 +13,7 @@
     path: "{{ zabbix_agent_tls_psk_directory }}"
     owner: zabbix
     group: root
-    mode: 0750
+    mode: '0750'
     state: directory
   when: zabbix_agent_encrypt
 
@@ -23,13 +23,13 @@
     dest: "{{ zabbix_agent_tls_psk_directory }}//zabbix-agent-tls-psk"
     owner: zabbix
     group: root
-    mode: 0640
+    mode: '0640'
   when: zabbix_agent_encrypt and zabbix_agent_tls_type == "psk"
 
 - name: Enable Zabbix Agent on boot
   service:
     name: zabbix-agent
-    enabled: yes
+    enabled: true
   notify: Start Zabbix Agent
 
 - name: Create Zabbix Agent extra config directory
@@ -37,7 +37,7 @@
     path: "{{ zabbix_agent_extra_config_path }}"
     owner: zabbix
     group: zabbix
-    mode: 0750
+    mode: '0750'
     state: directory
 
 - name: Put Zabbix Agent config in place
@@ -46,7 +46,7 @@
     dest: /etc/zabbix/zabbix_agentd.conf
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: Restart Zabbix Agent
   tags:
     - agent-config-file
@@ -57,7 +57,7 @@
     dest: "/usr/local/bin/{{ item }}"
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
   with_items:
     - check_network_shares
   tags:
@@ -69,7 +69,7 @@
     dest: "{{ zabbix_agent_extra_config_path }}/extra-params.conf"
     owner: zabbix
     group: zabbix
-    mode: 0640
+    mode: '0640'
   when: zabbix_agent_extra_config | length > 0
   notify: Restart Zabbix Agent
   tags:

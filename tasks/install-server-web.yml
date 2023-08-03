@@ -24,7 +24,7 @@
 - name: Enable PHP FPM service
   service:
     name: "{{ (ansible_distribution_major_version == '7') | ternary('rh-php72-php-fpm', 'php-fpm') }}"
-    enabled: yes
+    enabled: true
   notify: Start PHP FPM
 
 - name: Delete sample Zabbix HTTPD conf
@@ -37,7 +37,7 @@
   file:
     path: "{{ item.value.ssl_path }}"
     state: directory
-    mode: 0755
+    mode: '0755'
     owner: root
     group: root
   when: >-
@@ -52,7 +52,7 @@
     dest: "{{ item.value.ssl_path }}/cert.pem"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   when: >-
     zabbix_vhost_config is defined and
     item.value.use_https and
@@ -65,7 +65,7 @@
     dest: "{{ item.value.ssl_path }}/chain.pem"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   when: >-
     zabbix_vhost_config is defined and
     item.value.use_https and
@@ -78,7 +78,7 @@
     dest: "{{ item.value.ssl_path }}/privkey.pem"
     owner: root
     group: root
-    mode: 0600
+    mode: '0600'
   when: >-
     zabbix_vhost_config is defined and
     item.value.use_https and
@@ -91,7 +91,7 @@
     dest: /etc/httpd/vhosts.d/zabbix.conf
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   with_dict: "{{ zabbix_vhost_config }}"
   notify: Restart HTTPD
 
@@ -101,5 +101,5 @@
     dest: /etc/zabbix/web/zabbix.conf.php
     owner: apache
     group: apache
-    mode: 0640
+    mode: '0640'
   notify: Restart HTTPD

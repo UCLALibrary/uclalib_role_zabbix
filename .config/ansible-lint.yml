@@ -1,0 +1,6 @@
+---
+
+warn_list:
+  - role-name
+  - fqcn[action-core]
+  - fqcn[action]
