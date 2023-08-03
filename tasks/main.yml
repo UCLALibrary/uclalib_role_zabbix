@@ -9,6 +9,9 @@
 - import_tasks: install-agent.yml
   # noqa: name[missing]
 
+- import_tasks: install-local-check-scripts.yml
+  # noqa: name[missing]
+
 - import_tasks: install-server.yml
   # noqa: name[missing]
   when: zabbix_install_server
