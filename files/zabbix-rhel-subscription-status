@@ -1,0 +1,1 @@
+zabbix  ALL=(root)      NOPASSWD: /usr/local/bin/check_rhel_sub_status
