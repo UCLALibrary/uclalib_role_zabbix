@@ -15,13 +15,13 @@
     dest: /etc/zabbix/zabbix_server.conf
     owner: root
     group: zabbix
-    mode: 0640
+    mode: '0640'
   notify: Restart Zabbix Server
 
 - name: Enable Zabbix Server on boot
   service:
     name: zabbix-server
-    enabled: yes
+    enabled: true
   notify: Start Zabbix Server
 
 - name: Configure Zabbix user to run nmap in privileged mode

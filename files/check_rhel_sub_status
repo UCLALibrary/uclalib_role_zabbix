@@ -1,0 +1,2 @@
+#!/bin/bash
+subscription-manager status | grep -i overall | cut -d ':' -f2 | xargs

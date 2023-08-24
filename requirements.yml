@@ -1,5 +1,8 @@
 ---
 roles:
-  - "git+https://github.com/UCLALibrary/uclalib_role_rhelscl.git" 
-  - "git+https://github.com/UCLALibrary/uclalib_role_apache.git" 
-  - "git+https://github.com/UCLALibrary/uclalib_role_postgresql.git"
+  - name: "uclalib_role_rhelscl"
+    src: "git+https://github.com/UCLALibrary/uclalib_role_rhelscl.git"
+  - name: "uclalib_role_apache"
+    src: "git+https://github.com/UCLALibrary/uclalib_role_apache.git"
+  - name: "uclalib_role_postgresql"
+    src: "git+https://github.com/UCLALibrary/uclalib_role_postgresql.git"

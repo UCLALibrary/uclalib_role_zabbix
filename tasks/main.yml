@@ -1,16 +1,25 @@
 ---
 
 - import_tasks: setup-vars.yml
+  # noqa: name[missing]
 
 - import_tasks: install-repo.yml
+  # noqa: name[missing]
 
 - import_tasks: install-agent.yml
+  # noqa: name[missing]
+
+- import_tasks: install-local-check-scripts.yml
+  # noqa: name[missing]
 
 - import_tasks: install-server.yml
+  # noqa: name[missing]
   when: zabbix_install_server
 
 - import_tasks: install-server-web.yml
+  # noqa: name[missing]
   when: zabbix_install_server
 
 - import_tasks: init-db.yml
+  # noqa: name[missing]
   when: zabbix_install_server

@@ -1,0 +1,22 @@
+---
+
+- name: 'Install Helper Check Scripts'
+  copy:
+    src: '{{ item }}'
+    dest: '/usr/local/bin/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  with_items:
+    - 'check_rhel_sub_status'
+
+- name: 'Enable Required Sudo Entitlements'
+  copy:
+    src: '{{ item }}'
+    dest: '/etc/sudoers.d/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+    validate: '/usr/sbin/visudo -cf %s'
+  with_items:
+    - 'zabbix-rhel-subscription-status'
