@@ -1,2 +1,11 @@
-* fqcn[action-core]
-* fqcn[action]
+# This file contains ignores rule violations for ansible-lint
+handlers/main.yml fqcn[action-core]
+tasks/init-db.yml fqcn[action-core]
+tasks/install-agent.yml fqcn[action-core]
+tasks/install-local-check-scripts.yml fqcn[action-core]
+tasks/install-repo.yml fqcn[action-core]
+tasks/install-server-web.yml fqcn[action-core]
+tasks/install-server-web.yml fqcn[action]
+tasks/install-server.yml fqcn[action-core]
+tasks/main.yml fqcn[action-core]
+tasks/setup-vars.yml fqcn[action-core]

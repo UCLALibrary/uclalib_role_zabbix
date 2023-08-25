@@ -2,6 +2,7 @@ galaxy_info:
   author: John H. Robinson, IV <jhriv@ucla.edu>
   description: Zabbix Client
   company: UCLA Library
+  namespace: uclalib
 
   license: BSD-2-Clause
 
