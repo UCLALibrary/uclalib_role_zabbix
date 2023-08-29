@@ -20,13 +20,13 @@
 
 - name: Configure Timezone for Zabbix
   lineinfile:
-    path: "{{ (ansible_distribution_major_version == '7') | ternary('/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf', '/etc/php/php-fpm.d/zabbix.conf') }}"
+    path: "{{ php_fpm_path }}//zabbix.conf"
     line: 'php_value[date.timezone] = America/Los_Angeles'
   notify: Restart PHP FPM
 
 - name: Enable PHP FPM service
   service:
-    name: "{{ (ansible_distribution_major_version == '7') | ternary('rh-php72-php-fpm', 'php-fpm') }}"
+    name: "{{ php_fpm_service }}"
     enabled: true
   notify: Start PHP FPM
 

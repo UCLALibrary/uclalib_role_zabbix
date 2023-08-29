@@ -75,3 +75,7 @@ zabbix_agent_tls_type: psk
 zabbix_agent_tls_psk_directory: /etc/zabbix/tls
 zabbix_agent_tls_psk_identity: nonsensitivename
 zabbix_agent_tls_psk: dontstore_pskvalue_here
+
+### PHP FPM
+php_fpm_path: '/etc/php/php-fpm.d'
+php_fpm_service: 'php-fpm'
