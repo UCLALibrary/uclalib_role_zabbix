@@ -23,7 +23,7 @@
     </IfModule>
 
     <FilesMatch \.(php|phar)$>
-        SetHandler "proxy:unix:/{{ php_fpm_socket }}|fcgi://localhost"
+        SetHandler "proxy:unix:{{ php_fpm_socket }}|fcgi://localhost"
     </FilesMatch>
   </Directory>
 
