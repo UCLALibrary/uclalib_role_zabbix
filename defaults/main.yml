@@ -79,3 +79,4 @@ zabbix_agent_tls_psk: dontstore_pskvalue_here
 ### PHP FPM
 php_fpm_path: '/etc/php/php-fpm.d'
 php_fpm_service: 'php-fpm'
+php_fpm_socket: '/run/php-fpm/zabbix.sock'

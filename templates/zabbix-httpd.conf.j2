@@ -23,7 +23,7 @@
     </IfModule>
 
     <FilesMatch \.(php|phar)$>
-        SetHandler "proxy:unix:/var/opt/rh/rh-php72/run/php-fpm/zabbix.sock|fcgi://localhost"
+        SetHandler "proxy:unix:/{{ php_fpm_socket }}|fcgi://localhost"
     </FilesMatch>
   </Directory>
 
@@ -67,7 +67,7 @@
     </IfModule>
 
     <FilesMatch \.(php|phar)$>
-        SetHandler "proxy:unix:/var/opt/rh/rh-php72/run/php-fpm/zabbix.sock|fcgi://localhost"
+        SetHandler "proxy:unix:{{ php_fpm_socket }}|fcgi://localhost"
     </FilesMatch>
   </Directory>
 
