@@ -3,7 +3,7 @@
 - name: Enable Zabbix Frontend Repo
   ini_file:
     dest: /etc/yum.repos.d/zabbix.repo
-    section: zabbix-frontend
+    section: zabbix
     owner: root
     group: root
     mode: "0644"
