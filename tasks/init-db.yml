@@ -3,7 +3,7 @@
 - name: Init the database
   shell: |
     set -o pipefail
-    zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | \
+    zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | \
     psql postgres://{{ zabbix_db_user_name }}:{{ zabbix_db_user_pw }}@{{ zabbix_db_host }}:5432/{{ zabbix_db_name }}
   register: db_init_out
   changed_when: db_init_out.stderr_lines | length == 0

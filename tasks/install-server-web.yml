@@ -9,11 +9,21 @@
     mode: "0644"
     option: enabled
     value: "1"
+    no_extra_spaces: true
+
+- name: Enable php stream
+  command:
+    cmd: dnf module --assumeyes switch-to {{ zabbix_php_stream }}
+    warn: false
+  changed_when: "'Nothing to do' not in stream_switch.stdout"
+  when: zabbix_php_stream is defined
+  register: stream_switch
 
 - name: Install Zabbix Frontend packages
+  # noqa: package-latest
   yum:
     name: "{{ zabbix_frontend_pkgs }}"
-    state: present
+    state: latest
 
 - name: Configure Timezone for Zabbix
   lineinfile:

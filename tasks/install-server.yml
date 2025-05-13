@@ -1,13 +1,10 @@
 ---
 
 - name: Install Zabbix Server packages
+  # noqa: package-latest
   yum:
     name: "{{ zabbix_server_pkgs }}"
-    state: present
-  vars:
-    zabbix_server_pkgs:
-      - "{{ (zabbix_use_mysql) | ternary('zabbix-server-mysql', 'zabbix-server-pgsql') }}"
-      - nmap
+    state: latest
 
 - name: Upload Zabbix Server Configuration
   template:
