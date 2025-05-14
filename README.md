@@ -1,7 +1,8 @@
 uclalib_role_zabbix [![Build Status](https://travis-ci.com/UCLALibrary/uclalib_role_zabbix.svg?branch=master)](https://travis-ci.com/UCLALibrary/uclalib_role_elasticsearch)
 =========
 
-This Zabbix role can be utilized to configure an agent AND/OR server setup. The current iteration only supports RHEL/CentOS 7.
+This Zabbix role can be utilized to configure an agent AND/OR server setup. The
+current iteration only supports RHEL 8.
 
 Requirements
 ------------

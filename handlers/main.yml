@@ -12,7 +12,7 @@
 
 - name: Start PHP FPM
   service:
-    name: "{{ (ansible_distribution_major_version == '7') | ternary('rh-php72-php-fpm', 'php-fpm') }}"
+    name: php-fpm
     state: started
 
 - name: Start HTTPD
@@ -32,7 +32,7 @@
 
 - name: Restart PHP FPM
   service:
-    name: "{{ (ansible_distribution_major_version == '7') | ternary('rh-php72-php-fpm', 'php-fpm') }}"
+    name: php-fpm
     state: restarted
 
 - name: Restart HTTPD

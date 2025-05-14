@@ -1,12 +1,10 @@
 ---
 
 - name: Install Zabbix Agent packages
+  # noqa: package-latest
   yum:
     name: "{{ zabbix_agent_pkgs }}"
-    state: present
-  vars:
-    zabbix_agent_pkgs:
-      - zabbix-agent
+    state: latest
 
 - name: Create TLS directory if setting up agent encryption
   file:

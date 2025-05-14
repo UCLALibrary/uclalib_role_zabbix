@@ -3,27 +3,37 @@
 - name: Enable Zabbix Frontend Repo
   ini_file:
     dest: /etc/yum.repos.d/zabbix.repo
-    section: zabbix-frontend
+    section: zabbix
     owner: root
     group: root
     mode: "0644"
     option: enabled
     value: "1"
+    no_extra_spaces: true
+
+- name: Enable php stream
+  command:
+    cmd: dnf module --assumeyes switch-to {{ zabbix_php_stream }}
+    warn: false
+  changed_when: "'Nothing to do' not in stream_switch.stdout"
+  when: zabbix_php_stream is defined
+  register: stream_switch
 
 - name: Install Zabbix Frontend packages
+  # noqa: package-latest
   yum:
     name: "{{ zabbix_frontend_pkgs }}"
-    state: present
+    state: latest
 
 - name: Configure Timezone for Zabbix
   lineinfile:
-    path: "{{ (ansible_distribution_major_version == '7') | ternary('/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf', '/etc/php/php-fpm.d/zabbix.conf') }}"
+    path: '/etc/php-fpm.d/zabbix.conf'
     line: 'php_value[date.timezone] = America/Los_Angeles'
   notify: Restart PHP FPM
 
 - name: Enable PHP FPM service
   service:
-    name: "{{ (ansible_distribution_major_version == '7') | ternary('rh-php72-php-fpm', 'php-fpm') }}"
+    name: php-fpm
     enabled: true
   notify: Start PHP FPM
 

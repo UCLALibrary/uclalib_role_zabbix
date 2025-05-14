@@ -1,13 +1,17 @@
 ---
-zabbix_version: 5.0-1
-
-zabbix_use_mysql: false
+zabbix_version: 7.0
 
 zabbix_install_server: false
 
 zabbix_frontend_pkgs:
-  - zabbix-web-mysql
+  - zabbix-web-pgsql
   - zabbix-apache-conf
+
+zabbix_server_pkgs:
+  - zabbix-selinux-policy
+  - zabbix-server-pgsql
+  - zabbix-sql-scripts
+  - nmap
 
 zabbix_db_user_name: zabbix
 zabbix_db_user_pw: zabbix
@@ -45,6 +49,10 @@ zabbix_vhost_config:
     use_https: false
     use_acme: true
     ssl_path: /etc/letsencrypt/live/{{ ansible_hostname }}
+
+###  Zabbix Agent Packages
+zabbix_agent_pkgs:
+  - zabbix-agent
 
 ### Zabbix Agent Configuration Parameters
 zabbix_agent_pid_file_path: /var/run/zabbix/zabbix_agentd.pid
