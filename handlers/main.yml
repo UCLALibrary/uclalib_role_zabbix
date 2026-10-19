@@ -9,6 +9,7 @@
   service:
     name: zabbix-agent
     state: started
+  ignore_errors: '{{ ansible_check_mode }}'
 
 - name: Start PHP FPM
   service:

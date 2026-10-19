@@ -1,0 +1,18 @@
+---
+
+zabbix_rpm_url: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-release-latest-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.noarch.rpm" # noqa: yaml[line-length]
+
+# TODO: Verify these before installing Zabbix server on RHEL 10
+zabbix_frontend_pkgs:
+  - zabbix-web-pgsql
+  - zabbix-apache-conf
+  - httpd
+  - php-bcmath
+  - php-common
+  - php-fpm
+  - php-gd
+  - php-ldap
+  - php-mbstring
+  - php-pdo
+  - php-pgsql
+  - php-xml
