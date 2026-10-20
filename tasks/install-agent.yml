@@ -28,6 +28,7 @@
   service:
     name: zabbix-agent
     enabled: true
+  ignore_errors: '{{ ansible_check_mode }}'
   notify: Start Zabbix Agent
 
 - name: Create Zabbix Agent extra config directory
